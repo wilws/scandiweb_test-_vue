@@ -27,10 +27,9 @@ export default {
     state.products = newProductList;
   },
 
-  createItem(state,payload){
+    createItem(state,payload){
       const newProductList = [...state.products];
       newProductList.push(payload);
-      console.log(newProductList);
       state.products = newProductList;
   }
 };

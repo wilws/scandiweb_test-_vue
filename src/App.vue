@@ -13,6 +13,10 @@ import FooterLayout from "./components/layout/TheFooter.vue";
 export default {
   components:{
     FooterLayout
+  },
+  created(){
+    const LIVE_MODE = false;
+    this.$store.dispatch('setServerUrl',LIVE_MODE);
   }
 
 }

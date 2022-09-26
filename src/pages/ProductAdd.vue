@@ -33,22 +33,26 @@ export default {
 
     methods:{
 
-        saveItem(){
+        async saveItem(){
 
             const re = this.getInputValues();
-            console.log(re)
+            
             if (re.status !== 'success'){
                 alert(re.message)
             } else {
-                this.$store.dispatch({
+                const result = await this.$store.dispatch({
                     type:"products/createItem",
                     data:re.data
                 });
+                if (result.status === 'success'){
+                    this.$router.push('/');
+                } else {
+                    alert(result.message);
+                }
             }
         },
 
         cancel(){
-
             this.$router.push('/');
         },
  
@@ -60,7 +64,6 @@ export default {
             let errMsg = "";
        
             for (const [key, value] of Object.entries(inputValue)) { 
-                console.log(key)
                 let v = this.validation(key,value) // validating data, return errMsg (String) if not valid
                 if (v){
                     errMsg += v;          
