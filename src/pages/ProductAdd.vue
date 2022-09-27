@@ -59,7 +59,7 @@ export default {
         getInputValues(){
 
             const inputValue = this.$refs.productAddFrame.returnInputValue();
-            let values = [];
+            let values = {};
             let result =[];
             let errMsg = "";
        
@@ -71,6 +71,7 @@ export default {
                     values[key] = value;            // if valid, go on looping 
                 }
             }
+           
 
             // After looping complete / stop, check is there any errMsg
             if (!errMsg) {           // if no err, construct the data "spec"

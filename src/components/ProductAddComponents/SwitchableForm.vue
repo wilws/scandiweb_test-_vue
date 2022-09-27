@@ -116,7 +116,7 @@ export default {
         },
 
         returnInputValue(){
-            let value =[];
+            let value ={};
             let inputs = document.querySelectorAll(`#${this.selectedItem} input`)
             inputs.forEach((e)=>{
                 value[e.id] = e.value

@@ -17,6 +17,7 @@ export default {
   created(){
     const LIVE_MODE = false;
     this.$store.dispatch('setServerUrl',LIVE_MODE);
+    
   }
 
 }

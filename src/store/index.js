@@ -13,8 +13,7 @@ const store = createStore({
     setServerUrl(context, data) {
         
       let serverURL;
-      if (data) {
-        // True = live mode
+      if (data) { // True = live mode
         serverURL = "";
       } else {
         serverURL = "http://localhost:8888";

@@ -11,22 +11,22 @@ export default{
         return {
           removeList: [],
           products: [
-            {
-              id: "1",
-              sku: "1",
-              name: "what a good book",
-              price: "9",
-              productType: "Book",
-              spec: "50",
-            },
-            {
-              id: "2",
-              sku: "2",
-              name: "what a good DVD",
-              price: "9",
-              productType: "DVD",
-              spec: "20",
-            },
+            // {
+            //   id: "1",
+            //   sku: "1",
+            //   name: "what a good book",
+            //   price: "9",
+            //   productType: "Book",
+            //   spec: "50",
+            // },
+            // {
+            //   id: "2",
+            //   sku: "2",
+            //   name: "what a good DVD",
+            //   price: "9",
+            //   productType: "DVD",
+            //   spec: "20",
+            // },
             // {
             //   id: "3",
             //   sku: "3",

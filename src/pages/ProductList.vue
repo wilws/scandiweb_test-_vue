@@ -7,7 +7,6 @@
         @rightBtnEvent="MassDelete"
     ></header-layout>
     <products-frame :products="products"/>
-    <!-- <products-frame/> -->
 </template>
 
 
@@ -16,10 +15,11 @@ import HeaderLayout from "../components/layout/TheHeader.vue";
 import ProductsFrame from "../components/ProductListComponents/ProductsFrame.vue";
 
 export default {
+
     components:{HeaderLayout,ProductsFrame},
     activated() {
-        // Since this component is keeping alive.
-        // we need to update the dom manually when this component is activate
+        // Since this component is keeping-alive. (i.e. No killing during route-out)
+        // Therefore, we need to update the DOM manually here when this component is activate
         this.getProductFromStore();        
     },
     data(){
@@ -30,8 +30,9 @@ export default {
             products:[]     
         }
     },
-    created(){
-        this.getProductFromStore();
+    async created(){
+        await this.$store.dispatch('products/fetchProductFromDatabase');
+        await this.getProductFromStore();
     },
     mounted(){
 
@@ -40,9 +41,10 @@ export default {
         AddItem(){
             this.$router.push('/add-product');
         },
-        MassDelete(){
-            this.$store.dispatch('products/removeSeletedItems');
-            this.getProductFromStore();
+        async MassDelete(){
+            // this.$store.dispatch('products/removeSeletedItems');
+            await this.$store.dispatch('products/deleteItemsFromDatabase');
+            await this.getProductFromStore();
         },
         getProductFromStore(){
             this.products = this.$store.getters['products/getProducts'];
