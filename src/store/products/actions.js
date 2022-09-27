@@ -14,10 +14,10 @@ export default {
     context.commit("removeItemsFromRemoveList", payload.item);
   },
 
-//   clearRemoveList(context) {
-//     // Unset Remove list
-//     context.commit("clearRemoveList");
-//   },
+  clearRemoveList(context) {
+    // Unset Remove list. Called when user leave view product page
+    context.commit("clearRemoveList");
+  },
 
 //   removeSeletedItems(context) {
 //     // Remove items (in RemoveList) from Products list.
@@ -125,6 +125,7 @@ export default {
 
   // Function that dispatchs API to database
   async fetchApi(context, data) {
+
     const api = data.data.api;
     const url = context.rootGetters["getServerUrl"] + api;
     let fetchPara = {};

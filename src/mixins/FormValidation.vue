@@ -29,10 +29,10 @@ export default {
             let errMsg  = "";
             const strVal = value.toString().trim();
             if (strVal.length<= 0) {
-                errMsg +=`'${key}' cannot be empty; `;
+                errMsg +=`'${key}' cannot be empty.<br> `;
             }
             if (strVal.length > 30) {
-                errMsg +=`'${key}' cannot excess 30 characters; `;
+                errMsg +=`'${key}' cannot excess 30 characters.<br> `;
             }
             if (!errMsg){
                 return;
@@ -44,13 +44,13 @@ export default {
         numberCheck(key,value){
             let errMsg  = "";
             if (isNaN(value)) {
-                errMsg +=`'${key}' must be a number; `;
+                errMsg +=`'${key}' must be a number.<br> `;
             }
             if (value.toString().trim().length <= 0) {
-                errMsg +=`'${key}' cannot be empty; `;
+                errMsg +=`'${key}' cannot be empty.<br> `;
             }
             if ( +value < 0) {
-                errMsg +=`'${key}' cannot be negative; `;
+                errMsg +=`'${key}' cannot be negative.<br> `;
             }
             if (!errMsg){
                 return;
@@ -64,7 +64,7 @@ export default {
             let errMsg = "";
             const allowedType = ['Book','Furniture','DVD'];
             if (!allowedType.includes(value)){
-                errMsg = `'${key}' is not allowed type; `
+                errMsg = `'${key}' is not allowed type.<br> `
                 return errMsg;
             } else {
                 return;

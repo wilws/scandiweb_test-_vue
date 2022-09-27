@@ -1,35 +1,40 @@
 <template>
-<form>
-    <base-input
-        :labelName="'SKU'"
-        :key="'sku'"
-        :type="'text'"
-        :name="'Sku'"
-        :id="'sku'"
-        :placeholder="'please enter product sku'"
-    />
-    <br>
-    <base-input
-        :labelName="'Name'"
-        :key="'name'"
-        :type="'text'"
-        :name="'Name'"
-        :id="'name'"
-        :placeholder="'please enter product name'"
-    />
-    <br>
-    <base-input
-        :labelName="'Price ($)'"
-        :key="'price'"
-        :type="'number'"
-        :name="'Price'"
-        :id="'price'"
-        :placeholder="'please enter product price'"
-    />
+    <form class="product-add-form" id="product_form">
+        <base-input
+            :labelName="'SKU'"
+            :key="'sku'"
+            :type="'text'"
+            :name="'Sku'"
+            :id="'sku'"
+            :placeholder="''"
+            :min="0"
+        />
+        <br>
+        <base-input
+            :labelName="'Name'"
+            :key="'name'"
+            :type="'text'"
+            :name="'Name'"
+            :id="'name'"
+            :placeholder="''"
+            :min="0"
+        />
+        <br>
+        <base-input
+            :labelName="'Price ($)'"
+            :key="'price'"
+            :type="'number'"
+            :name="'Price'"
+            :id="'price'"
+            :placeholder="''"
+            :min="0"
+        />
 
-    <switchable-form ref="switchableForm"/>
+        
+        <switchable-form ref="switchableForm"/>
+        
 
-  </form>
+    </form>
 </template>
 
 <script>
@@ -62,3 +67,18 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" >
+
+.product-add-form{
+    padding:50px 5%;
+    width:100%;
+    overflow:hidden;
+
+    .switchable-form-section{
+        margin-top:4rem;
+    }
+}
+
+
+</style>

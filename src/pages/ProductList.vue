@@ -1,12 +1,14 @@
 <template>
-    <header-layout 
-        :title="title" 
-        :leftBtnName="leftBtnName"
-        :rightBtnName="rightBtnName"
-        @leftBtnEvent="AddItem"
-        @rightBtnEvent="MassDelete"
-    ></header-layout>
-    <products-frame :products="products"/>
+    <div class="product-list-section">
+        <header-layout 
+            :title="title" 
+            :leftBtnName="leftBtnName"
+            :rightBtnName="rightBtnName"
+            @leftBtnEvent="AddItem"
+            @rightBtnEvent="MassDelete"
+        ></header-layout>
+        <products-frame :products="products"/>
+    </div>
 </template>
 
 
@@ -24,7 +26,7 @@ export default {
     },
     data(){
         return {
-            title : "Product List",
+            title : "Product_List",
             leftBtnName : "ADD",
             rightBtnName : "MASS DELETE",     
             products:[]     
@@ -53,9 +55,17 @@ export default {
     },
     beforeRouteLeave(to,from,next){
         this.$store.dispatch('products/clearRemoveList');    // Remove the selected Items before leave this page
+        this.title=""
         next();
     },
 
 
 }
 </script>
+
+<style lang="scss" scoped>
+    .product-list-section{
+        overflow: hidden;
+        @include pageSetting();
+    }
+</style>

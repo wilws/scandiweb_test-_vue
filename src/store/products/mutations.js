@@ -51,7 +51,6 @@ export default {
 
   updateProductsList(state, payload){
     // After fetching data from db, update the vuex's products list
-    console.log(payload);
     state.products = [...payload];
   },
 };

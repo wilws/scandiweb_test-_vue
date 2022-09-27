@@ -1,11 +1,12 @@
 <template>
-
-    <router-view v-slot="slotProps"> 
-      <keep-alive>          
-          <component :is="slotProps.Component"></component>   
-      </keep-alive>   
-    </router-view>
-    <footer-layout/>
+    <div class="container">
+      <router-view v-slot="slotProps"> 
+        <keep-alive>    
+              <component :is="slotProps.Component"></component>   
+        </keep-alive>   
+      </router-view>
+      <footer-layout/>
+    </div>
 </template>
 
 <script>
@@ -25,8 +26,28 @@ export default {
 
 
 <style lang="scss">
-/* Common Style */
 
+/* 
+.fade-button-enter-from,
+.fade-button-leave-to{
+  opacity:0;
+}
+
+.fade-button-enter-active{
+  transition: opacity 2s ease-out;
+}
+
+.fade-button-leave-active{
+  transition: opacity 0.3s ease-in;
+}
+
+.fade-button-enter-to
+.fade-button-leave-from{
+  opacity: 1;
+} */
+
+
+/* Common Style */
 
 * {
     margin:0;
@@ -34,5 +55,19 @@ export default {
     outline:none;
     box-sizing:border-box;
     text-decoration:none;
+}
+
+.container{
+  position: relative;
+  width:100vw;
+  height:100vh;
+  min-width: 220px;
+  /* min-height: 100vh; */
+  border:rgb(0, 0, 0) solid thick;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding: 0 2.5rem;
+  
 }
 </style>

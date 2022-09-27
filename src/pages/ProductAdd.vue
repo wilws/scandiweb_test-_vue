@@ -1,12 +1,19 @@
 <template>
-    <header-layout 
-        :title="title" 
-        :leftBtnName="leftBtnName"
-        :rightBtnName="rightBtnName"
-        @leftBtnEvent="saveItem"
-        @rightBtnEvent="cancel"
-    ></header-layout>
-    <products-add-frame ref="productAddFrame" /> 
+    <div class="product-add-section">
+        <alert-component v-show="showAlert"
+            :msg="errorMsg"
+            :btnContent="'OK'"
+            @confirm="closeAlert"
+        ></alert-component>
+        <header-layout 
+            :title="title" 
+            :leftBtnName="leftBtnName"
+            :rightBtnName="rightBtnName"
+            @leftBtnEvent="saveItem"
+            @rightBtnEvent="cancel"
+        ></header-layout>
+        <products-add-frame ref="productAddFrame" /> 
+    </div>
 </template>
 
 
@@ -15,15 +22,19 @@
 import HeaderLayout from "../components/layout/TheHeader.vue";
 import ProductsAddFrame from "../components/ProductAddComponents/ProductsAddFrame.vue"
 import FormValidation from "../mixins/FormValidation.vue";
+import AlertComponent from "../components/UI/AlertComponent.vue"
+
 export default {
-    components:{HeaderLayout,ProductsAddFrame},
+    components:{HeaderLayout,ProductsAddFrame,AlertComponent},
     mixins:[FormValidation],
     data(){
         return {
-            title : "Product Add",
+            title : "Product_Add",
             leftBtnName : "Save",
             rightBtnName : "Cancel",
             inputIds:['sku','name','price','size','productType','height','width','length','weight'],
+            showAlert:false,
+            errorMsg: "",
         }
     },
 
@@ -38,7 +49,9 @@ export default {
             const re = this.getInputValues();
             
             if (re.status !== 'success'){
-                alert(re.message)
+                this.showAlert = true;
+                this.errorMsg = re.message;
+
             } else {
                 const result = await this.$store.dispatch({
                     type:"products/createItem",
@@ -47,9 +60,15 @@ export default {
                 if (result.status === 'success'){
                     this.$router.push('/');
                 } else {
-                    alert(result.message);
+                    this.showAlert = true;
+                    this.errorMsg = re.message;
                 }
             }
+        },
+        closeAlert(){
+            console.log('trigger')
+            this.showAlert = false;
+            this.errorMsg = "";
         },
 
         cancel(){
@@ -101,7 +120,14 @@ export default {
     beforeRouteLeave(to,from,next){
         // reset the form before leave this page
         this.resetForm();
+        this.title=""
         next();
     }
 }
 </script>
+
+<style lang="scss">
+.product-add-section{
+    @include pageSetting();
+}
+</style>
