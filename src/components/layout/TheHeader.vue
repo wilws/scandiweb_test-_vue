@@ -34,16 +34,15 @@ export default {
         },
 
         showTitle(){
-
             let char = "";
             let delayValue = 0;
-            [...this.title].forEach((c)=>{
+            [...this.title].forEach((c)=>{               // break the title string in to single characters 
                 if (c == "_"){
-                    char = "&nbsp;"
+                    char = "&nbsp;"                     
                 } else {
                     char = c
                 }
-                delayValue += 0.1;
+                delayValue += 0.1;                       // animation delay time for every characters
                 this.titleArr.push({
                     char : char,
                     delayValue : `${delayValue}s`
@@ -63,7 +62,6 @@ export default {
 
         width:90%;
         height:6rem;
-        /* padding-top:40px; */
         display: flex;
         flex-direction: row;
         align-items: flex-end;
@@ -112,7 +110,6 @@ export default {
             padding-bottom:.3rem;
 
             @media(max-width:540px){
-                /* margin-top:20px; */
                 display: flex;
                 justify-content: space-between;
                 width:100%;

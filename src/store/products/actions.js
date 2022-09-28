@@ -2,7 +2,7 @@
 export default {
   addItemsToRemoveList(context, payload) {
     // No database involved
-    // add product id to "RemoveList".
+    // Add product id to "RemoveList".
     // Items in "RemoveList" are about to be removed after "Mass Remove" is clicked
     context.commit("addItemsToRemoveList", payload.item);
   },
@@ -15,14 +15,10 @@ export default {
   },
 
   clearRemoveList(context) {
-    // Unset Remove list. Called when user leave view product page
+    // No database involved
+    // Unset Remove list. Called when user leaves "Product List" page
     context.commit("clearRemoveList");
   },
-
-//   removeSeletedItems(context) {
-//     // Remove items (in RemoveList) from Products list.
-//     context.commit("removeSeletedItems");
-//   },
 
 
   // Function that delete data from database
@@ -38,7 +34,7 @@ export default {
         },
       });
 
-      await context.commit("removeSeletedItems"); // update vuex
+      await context.commit("removeSeletedItems");  // When deletion succes. Update products list in vuex store
       return {
         status: "success",
         data: { message: data },
@@ -102,8 +98,8 @@ export default {
           method: "POST",
         },
       });
-      product["id"] = data.id; // if success, will return newly inserted id
-      await context.commit("createItem", product); // update vuex
+      product["id"] = data.id;                      // if success, will return newly inserted id
+      await context.commit("createItem", product);  // update vuex
       return {
         status: "success",
         data: {

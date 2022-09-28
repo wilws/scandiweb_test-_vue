@@ -88,8 +88,8 @@ export default {
     components:{BaseInput},
     data(){
         return{
-            selectedItem:"Book",
-            type:{
+            selectedItem:"Book",                            // Pre-set value as Book
+            type:{                                          // Pre-set value as Book
                 Book:true,
                 DVD:false,
                 Furniture:false,
@@ -98,19 +98,18 @@ export default {
     },
     watch:{
         selectedItem(t){
-            // If type change, trigger switcher func
-           this.switcher(t);
+           this.switcher(t);        // Monitor the state of  "selectedItem".  Perform switcher() when state change
         },
     },
     methods:{
         switcher(t){
-            for (let k in this.type ){
-                if (k == t){       
+            for (let k in this.type ){      
+                if (k == t){                
                     this.type[t] = true;    // Set the current type to true (show it)
                 } else {                        
-                    this.type[k] = false;  
+                    this.type[k] = false;   // Set other types to false (hidde it)
                 }
-                this.setInputValue(k,null);  // Re-Set the input value .
+                this.setInputValue(k,null);  // Re-Set all the input value when switching. second arg is the value that to be set
             }
             
         },
@@ -143,7 +142,11 @@ export default {
 
 <style lang="scss" scoped>
 .switchable-form-section{
-    /* the margin is controlled by "ProductAddFrame.vue" */
+    /* !!! */
+    /* The margin-top is controlled by parent "ProductAddFrame.vue" */
+    /* Not doing here to avoid out-putting of strange position when resue of the component.  */
+    /* !!! */
+    
     .switcher-input{
         width:50%;
         display: flex;

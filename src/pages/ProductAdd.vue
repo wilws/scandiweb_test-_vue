@@ -2,7 +2,7 @@
     <div class="product-add-section">
         <alert-component v-show="showAlert"
             :msg="errorMsg"
-            :btnContent="'OK'"
+            :btnContent="alertBtnNamae"
             @confirm="closeAlert"
         ></alert-component>
         <header-layout 
@@ -26,42 +26,36 @@ import AlertComponent from "../components/UI/AlertComponent.vue"
 
 export default {
     components:{HeaderLayout,ProductsAddFrame,AlertComponent},
-    mixins:[FormValidation],
+    mixins:[FormValidation],                                  // import mixins function to validae user input
     data(){
         return {
-            title : "Product_Add",
-            leftBtnName : "Save",
-            rightBtnName : "Cancel",
-            inputIds:['sku','name','price','size','productType','height','width','length','weight'],
-            showAlert:false,
-            errorMsg: "",
+            title : "Product_Add",             // Set page title                            
+            leftBtnName : "Save",              // Set header left button's name
+            rightBtnName : "Cancel",           // Set header right button's name
+            showAlert:false,                   // "true" = show alert component 
+            errorMsg: "",                      // "erroMSg" in the alert
+            alertBtnNamae : "OK"               // name for the button in alert ot dismiss the alert compnent
         }
     },
-
-    mounted(){
-
-    },
-
     methods:{
 
-        async saveItem(){
-
-            const re = this.getInputValues();
+        async saveItem(){                                          // When "save" button is clicked
+            const re = this.getInputValues();                      // Trigger "getInputValues()"" to get and validate inputs
             
-            if (re.status !== 'success'){
-                this.showAlert = true;
+            if (re.status !== 'success'){                          // if "error", show alert component
+                this.showAlert = true;  
                 this.errorMsg = re.message;
 
-            } else {
+            } else {                                                // if "success", create object in vuex and database
                 const result = await this.$store.dispatch({
                     type:"products/createItem",
                     data:re.data
                 });
-                if (result.status === 'success'){
-                    this.$router.push('/');
+                if (result.status === 'success'){                   // if creation success
+                    this.$router.push('/');                         // return to "Product List" page
                 } else {
-                    this.showAlert = true;
-                    this.errorMsg = re.message;
+                    this.showAlert = true;                          // if creation faile, show alert component
+                    this.errorMsg = re.message;                     
                 }
             }
         },
@@ -75,35 +69,36 @@ export default {
             this.$router.push('/');
         },
  
-        getInputValues(){
+        getInputValues(){               
 
-            const inputValue = this.$refs.productAddFrame.returnInputValue();
-            let values = {};
-            let result =[];
-            let errMsg = "";
+            const inputValue = this.$refs.productAddFrame.returnInputValue();             // it ask the child to retrun input value
+            let values = {};                                                              // store the newly created item
+            let result =[];                                                               // store result and return to "saveItem". 
+            let errMsg = "";                                                              // error message,if any, during the create process
        
-            for (const [key, value] of Object.entries(inputValue)) { 
-                let v = this.validation(key,value) // validating data, return errMsg (String) if not valid
+            for (const [key, value] of Object.entries(inputValue)) {         
+                let v = this.validation(key,value)                           // validating data, return error message (String) if not valid
                 if (v){
-                    errMsg += v;          
+                    errMsg += v;                                             // if v contains error message, store in "errMsg".
                 } else {
-                    values[key] = value;            // if valid, go on looping 
+                    values[key] = value;                                     // if valid, store value in "values"
                 }
             }
            
-
-            // After looping complete / stop, check is there any errMsg
-            if (!errMsg) {           // if no err, construct the data "spec"
-                if (values.height){
-                    values['spec'] =`${values.height}x${values.width}x${values.length}`;   
+            // After looping complete, check is there any errMsg
+            
+            if (!errMsg) {     
+                values['spec'] = ""                                                         // if no error message, 
+                if (values.height){                                                         // if values has key "heigh" = Type must be "furniture"
+                    values['spec'] =`${values.height}x${values.width}x${values.length}`;    //  construct the data "spec" for product type "Furniture"
                 } else {
-                     values['spec'] = (!values.weight) ? values.size : values.weight;
+                     values['spec'] = (!values.weight) ? values.size : values.weight;       // if no "heigh", either "weight" and "size" should be available
                 }
                 result = {
                     status:'success',
                     data: values
                 }
-            } else {            // if err, return status 
+            } else {                            // if err, return status 
                 result = {
                     status:'error',
                     message: errMsg
@@ -113,14 +108,15 @@ export default {
         },
 
         resetForm(){
-            this.$refs.productAddFrame.resetInputValue();
+            this.$refs.productAddFrame.resetInputValue();  // Reset all the input value. 
+                                                           // Since the input fields are in child component. 
+                                                           // It calls child's reset method. 
         }
     },
 
     beforeRouteLeave(to,from,next){
-        // reset the form before leave this page
-        this.resetForm();
-        this.title=""
+        this.resetForm();  // reset the form before leave this page
+        this.title=""      // reset the header title 
         next();
     }
 }

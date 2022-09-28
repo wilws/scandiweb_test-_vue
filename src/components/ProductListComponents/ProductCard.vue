@@ -6,8 +6,7 @@
                 <p>{{ sku }}</p>
                 <p>{{ name }}</p>
                 <p>{{ price }}  $</p>
-                <!-- <p> {{ type }} </p> -->
-                <p> {{ description }} : {{ spec }} {{ unit }} </p>
+                <p> {{ attribute }} : {{ spec }} {{ unit }} </p>
             </div>
         </div>
      <!-- </div> -->
@@ -16,54 +15,53 @@
 <script>
 export default {
     props:["id","sku","name","price","type","spec"],
-    activated(){
-        this.uncheck();
+    activated(){                                
+        this.uncheck();                        //  Unset all the checkbox
     },
     created(){
-        this.setUnit(this.type);
+        this.setUnit(this.type);               //  Set the product type's attribute
     },
     data(){
         return {
-            description : "",
-            unit : "",
-            elementId : "",
-            selected : false
+            attribute : "",                    //  Store attribute like : "Weight" / "Size" / Height, etc
+            unit : "",                         //  Store unite like: "KG" / "CM" / Height, etc
+            // elementId : "",                    
+            selected : false                   //  State check if the box is checked.
         }
     },
     methods:{
-        setUnit(type){
-            const u = this.getSpecUnit(type);
-            this.description = u[0];
+        setUnit(type){                            // Set the type's attribute                             
+            const u = this.getSpecUnit(type);     // in "mixins/typeSepc.vue", there is a object To match product type with: 
+            this.attribute = u[0];                // "attribute" (Obj[0]) ||  "unit" (Obj[1])  
             this.unit = u[1];
         },
+
+
         uncheck(){
-            document.querySelectorAll(".delete-clickbox").forEach((c)=>{
-                c.checked = false;
+            document.querySelectorAll(".delete-clickbox").forEach((c)=>{      // Reset the checkbox to un click.
+                c.checked = false;                                            // Used whenever entering to this pag 
             });
             this.selected = false;
         },
-        selectCard(id){
-            if (!this.selected) {                
-                this.$store.dispatch({
-                    type: "products/addItemsToRemoveList",
+
+
+        selectCard(id){                                           // When the box is checked                           
+            if (!this.selected) {                                 // Check if it is checked 
+                this.$store.dispatch({                            // if not, this is a add to the remove list click
+                    type: "products/addItemsToRemoveList",        //  trigger actions to update the removeList in VUEX
                     item: id,	
                 });
-                this.selected = true;
+                this.selected = true;                              // Alter state to true =  "this box is in the remove list"
                 
-            } else {
+            } else {                                               // Vice versa below
                 this.$store.dispatch({
                     type: "products/removeItemsFromRemoveList",
                     item: id,	
                 });
                 this.selected = false;
             }
-
-            console.log(this.$store.getters['products/getRemoveList'])
         }
-    },
-
-
-     
+    },    
 }
 </script>
 
@@ -80,7 +78,7 @@ export default {
     transition: all .3s ease;
     background-color: rgb(255, 255, 255);
     cursor: pointer;
-    /* transition: transform .4s; */
+
 
     &:hover{
         box-shadow: .3rem .3rem 1rem rgba(11, 137, 187, 0.527);
@@ -107,7 +105,6 @@ export default {
         box-shadow: .3rem .3rem 1rem rgba(252, 97, 97, 0.527);
        
     }
-
 
     .card-content{
         position: absolute;

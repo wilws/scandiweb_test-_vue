@@ -48,21 +48,20 @@ export default {
         }
     },
     methods:{
-        resetInputValue(){
+        resetInputValue(){                                                  // Reset value when receive parent's call
             this.inputIds.forEach((id)=>{
                 document.getElementById(id).value = null;
             });
             this.$refs.switchableForm.resetAllInputValue(); 
         },
-        returnInputValue(){
+        returnInputValue(){                                                 // Return value when receive parent's call
             let value =[];
             this.inputIds.forEach((id)=>{
                 let e = document.getElementById(id);
                 value[e.id] = e.value;
             });
-
-            const formValue =  this.$refs.switchableForm.returnInputValue();
-            return {...value, ...formValue}
+            const formValue =  this.$refs.switchableForm.returnInputValue();    // It also calls child "switchable inputs" to return input value
+            return {...value, ...formValue}                                     // And combine into one object before return to parent 
         }
     }
 }

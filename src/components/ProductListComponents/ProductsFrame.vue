@@ -23,16 +23,12 @@ import ProductCard from "./ProductCard.vue";
 export default {
     props:['products'],
     components:{ProductCard},
-    // activated(){
-    //     this.centralise();
-    // },
     mounted(){
-        // this.centralise();
-        window.addEventListener("resize",this.centralise); 
-        this.centralise();
+        window.addEventListener("resize",this.centralise);       // when this component is mounted, create a listenen that always adjuct the cards positions
+        this.centralise();                                                                 
     },
     methods:{
-        centralise(){
+        centralise(){                                                                       // keep the items in center
             const boxWidth = 200;
             const gap = 35;
             const totalBoxWidth = boxWidth+gap;
