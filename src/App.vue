@@ -16,7 +16,7 @@ export default {
     FooterLayout
   },
   created(){
-    const LIVE_MODE = false;
+    const LIVE_MODE = true;
     this.$store.dispatch('setServerUrl',LIVE_MODE);
     
   }
@@ -26,26 +26,6 @@ export default {
 
 
 <style lang="scss">
-
-/* 
-.fade-button-enter-from,
-.fade-button-leave-to{
-  opacity:0;
-}
-
-.fade-button-enter-active{
-  transition: opacity 2s ease-out;
-}
-
-.fade-button-leave-active{
-  transition: opacity 0.3s ease-in;
-}
-
-.fade-button-enter-to
-.fade-button-leave-from{
-  opacity: 1;
-} */
-
 
 /* Common Style */
 

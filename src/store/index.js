@@ -14,7 +14,7 @@ const store = createStore({
         
       let serverURL;
       if (data) { // True = live mode
-        serverURL = "";
+        serverURL = "https://3.8.185.119";
       } else {
         serverURL = "http://localhost:8888";
       }
