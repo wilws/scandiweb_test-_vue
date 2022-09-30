@@ -12,7 +12,7 @@
             @leftBtnEvent="saveItem"
             @rightBtnEvent="cancel"
         ></header-layout>
-        <products-add-frame ref="productAddFrame" /> 
+        <products-add-frame ref="productAddFrame" />     
     </div>
 </template>
 
@@ -41,13 +41,13 @@ export default {
 
         async saveItem(){                                          // When "save" button is clicked
             const re = this.getInputValues();                      // Trigger "getInputValues()"" to get and validate inputs
-            
-            if (re.status !== 'success'){                          // if "error", show alert component
+           
+            if (re.status !== 'success'){                          // if "error", mean validation fail. show alert component
                 this.showAlert = true;  
                 this.errorMsg = re.message;
 
-            } else {                                                // if "success", create object in vuex and database
-                const result = await this.$store.dispatch({
+            } else {                                                // if "success", pass the validation in vue. 
+                const result = await this.$store.dispatch({         // Try to create object in vuex and database
                     type:"products/createItem",
                     data:re.data
                 });
@@ -55,12 +55,11 @@ export default {
                     this.$router.push('/');                         // return to "Product List" page
                 } else {
                     this.showAlert = true;                          // if creation faile, show alert component
-                    this.errorMsg = re.message;                     
+                    this.errorMsg = result.message;                     
                 }
             }
         },
         closeAlert(){
-            console.log('trigger')
             this.showAlert = false;
             this.errorMsg = "";
         },

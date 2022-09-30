@@ -29,7 +29,7 @@ export default {
             let errMsg  = "";
             const strVal = value.toString().trim();
             if (strVal.length<= 0) {
-                errMsg +=`'${key}' cannot be empty.<br> `;
+                errMsg +=`'${key}' cannot be empty.Please, submit required data.<br> `;
             }
             if (strVal.length > 30) {
                 errMsg +=`'${key}' cannot excess 30 characters.<br> `;
@@ -47,7 +47,7 @@ export default {
                 errMsg +=`'${key}' must be a number.<br> `;
             }
             if (value.toString().trim().length <= 0) {
-                errMsg +=`'${key}' cannot be empty.<br> `;
+                errMsg +=`'${key}' cannot be empty.Please, submit required data.<br> `;
             }
             if ( +value < 0) {
                 errMsg +=`'${key}' cannot be negative.<br> `;
@@ -64,7 +64,7 @@ export default {
             let errMsg = "";
             const allowedType = ['Book','Furniture','DVD'];
             if (!allowedType.includes(value)){
-                errMsg = `'${key}' is not allowed type.<br> `
+                errMsg = `'${key}' is not allowed type. Please, provide the data of indicated type<br> `
                 return errMsg;
             } else {
                 return;

@@ -121,8 +121,9 @@ export default {
             });
         },
 
-        resetAllInputValue(){
-            this.selectedItem = 'Book';
+        resetAllInputValue(){          
+            // this.selectedItem = 'Book';         // Cannot alter selectedItem to triger watcher 
+            this.setInputValue('Book',null);       //  Because this function is triggered from parent 
         },
 
         returnInputValue(){
@@ -146,7 +147,7 @@ export default {
     /* The margin-top is controlled by parent "ProductAddFrame.vue" */
     /* Not doing here to avoid out-putting of strange position when resue of the component.  */
     /* !!! */
-    
+
     .switcher-input{
         width:50%;
         display: flex;
