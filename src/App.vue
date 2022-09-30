@@ -16,7 +16,7 @@ export default {
     FooterLayout
   },
   created(){
-    const LIVE_MODE = false;
+    const LIVE_MODE = true;
     this.$store.dispatch('setServerUrl',LIVE_MODE);
     
   }

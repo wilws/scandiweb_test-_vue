@@ -52,6 +52,7 @@ export default {
         
     },
     beforeRouteLeave(to,from,next){
+        console.log('before')
         this.$store.dispatch('products/clearRemoveList');    // Remove the selected items before leave this page
         this.title=""                                        // Reset title
         next();

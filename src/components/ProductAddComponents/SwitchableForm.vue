@@ -121,9 +121,9 @@ export default {
             });
         },
 
-        resetAllInputValue(){          
-            // this.selectedItem = 'Book';         // Cannot alter selectedItem to triger watcher 
-            this.setInputValue('Book',null);       //  Because this function is triggered from parent 
+        resetAllInputValue(){     
+            this.selectedItem = 'Book';             // Cannot alter selectedItem to triger watcher 
+            this.setInputValue('Book',null);        //  Because this function is triggered from parent 
         },
 
         returnInputValue(){

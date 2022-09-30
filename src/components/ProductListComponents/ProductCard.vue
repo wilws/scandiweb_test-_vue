@@ -15,7 +15,8 @@
 <script>
 export default {
     props:["id","sku","name","price","type","spec"],
-    activated(){                                
+    activated(){     
+                                   
         this.uncheck();                        //  Unset all the checkbox
     },
     created(){
@@ -24,8 +25,7 @@ export default {
     data(){
         return {
             attribute : "",                    //  Store attribute like : "Weight" / "Size" / Height, etc
-            unit : "",                         //  Store unite like: "KG" / "CM" / Height, etc
-            // elementId : "",                    
+            unit : "",                         //  Store unite like: "KG" / "CM" / Height, etc                  
             selected : false                   //  State check if the box is checked.
         }
     },
@@ -38,7 +38,7 @@ export default {
 
 
         uncheck(){
-            document.querySelectorAll(".delete-clickbox").forEach((c)=>{      // Reset the checkbox to un click.
+            document.querySelectorAll(".delete-checkbox").forEach((c)=>{      // Reset the checkbox to un click.
                 c.checked = false;                                            // Used whenever entering to this pag 
             });
             this.selected = false;
