@@ -1,7 +1,7 @@
 <template>
      <!-- <div :id="id"> -->
         <div class="product-card" :class="{ clicked: selected }">
-            <input class="delete-clickbox"  type="checkbox" :name="name"  @click="selectCard(id)"   >
+            <input class="delete-checkbox"  type="checkbox" :name="name"  @click="selectCard(id)"   >
             <div class="card-content">
                 <p>{{ sku }}</p>
                 <p>{{ name }}</p>

@@ -14,7 +14,7 @@ const store = createStore({
         
       let serverURL;
       if (data) { // True = live mode
-        serverURL = "https://3.8.185.119";
+        serverURL = "https://wongwaishun.store";
       } else {
         serverURL = "http://localhost:8888";
       }
