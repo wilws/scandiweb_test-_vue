@@ -77,6 +77,7 @@ export default {
     transition-property: transform, border,box-shadow;
     transition: all .3s ease;
     background-color: rgb(255, 255, 255);
+    overflow:hidden;
     cursor: pointer;
 
 
@@ -107,11 +108,11 @@ export default {
     }
 
     .card-content{
-        position: absolute;
+        /* position: absolute;
         margin-left: auto;
         margin-right: auto;
         left: 0;
-        right: 0;
+        right: 0; */
         text-align: center;
         font-family:  $primary-font;
         font-weight: bold;
