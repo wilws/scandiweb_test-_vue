@@ -41,7 +41,14 @@ export default {
 
 
   createItem(state, payload) {
+
     // Add item in products list
+    payload["spec"] = "";                                                     
+    if (payload.height) {                                                         // if values has key "heigh" = Type must be "furniture"
+      payload["spec"] = `${payload.height}x${payload.width}x${payload.length}`;   //  construct the data "spec" for product type "Furniture"
+    } else {
+      payload["spec"] = !payload.weight ? payload.size : payload.weight;          // if no "heigh", either "weight" and "size" should be available
+    }
     const newProductList = [...state.products];
     newProductList.push(payload);
     state.products = newProductList;

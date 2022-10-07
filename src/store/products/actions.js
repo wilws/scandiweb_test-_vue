@@ -53,6 +53,7 @@ export default {
 
   // Function that fetchs data from database
   async fetchProductFromDatabase(context) {
+      
     try {
       const data = await context.dispatch({
         type: "fetchApi",
@@ -62,6 +63,8 @@ export default {
           method: "GET",
         },
       });
+
+ 
 
       await context.commit("updateProductsList", data); // update vuex
       return {
@@ -83,11 +86,8 @@ export default {
 
   // Function that writes new record to database
   async createItem(context, payload) {
-    const keys = ["sku", "name", "price", "spec", "productType"];
-    const product = {};
-    keys.forEach((key) => {
-      product[key] = payload.data[key];
-    });
+
+    const product = payload.data;
 
     try {
       const data = await context.dispatch({
@@ -148,6 +148,8 @@ export default {
       const resData = await fetch(url, fetchPara);
       const res = await resData.json();
 
+     
+
       if (resData.status !== 200) {
         // Check if internal or connection error
         const error = new Error();
@@ -164,6 +166,7 @@ export default {
 
       return res.data;
     } catch (err) {
+
       const error = err; // prevent unnecessary "try/catch wrapper"
       throw error;
     }

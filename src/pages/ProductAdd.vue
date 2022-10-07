@@ -87,12 +87,12 @@ export default {
             // After looping complete, check is there any errMsg
             
             if (!errMsg) {     
-                values['spec'] = ""                                                         // if no error message, 
-                if (values.height){                                                         // if values has key "heigh" = Type must be "furniture"
-                    values['spec'] =`${values.height}x${values.width}x${values.length}`;    //  construct the data "spec" for product type "Furniture"
-                } else {
-                     values['spec'] = (!values.weight) ? values.size : values.weight;       // if no "heigh", either "weight" and "size" should be available
-                }
+                // values['spec'] = ""                                                         // if no error message, 
+                // if (values.height){                                                         // if values has key "heigh" = Type must be "furniture"
+                //     values['spec'] =`${values.height}x${values.width}x${values.length}`;    //  construct the data "spec" for product type "Furniture"
+                // } else {
+                //      values['spec'] = (!values.weight) ? values.size : values.weight;       // if no "heigh", either "weight" and "size" should be available
+                // }
                 result = {
                     status:'success',
                     data: values
